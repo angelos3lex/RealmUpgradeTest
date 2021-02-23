@@ -10,7 +10,6 @@ import React from 'react';
 import {StyleSheet, View, Text, Pressable} from 'react-native';
 import MyRealm from './MyRealm';
 import TableA from './TableA';
-import TableB from './TableB';
 
 const App = () => {
   const press = () => {
@@ -18,23 +17,15 @@ const App = () => {
     let realm = new MyRealm();
     let tableA = new TableA();
     console.log('First Object to be added: ', tableA.getInfo());
-    realm.add(tableA, TableA.schema.name);
+    realm.addA(tableA, TableA);
     console.log('Successfully added tableA to Db');
 
-    console.log("Creating new tabelB to add to the Db")
-    let tableB = new TableB();
-    tableB.firstName = 'tableB';
-    console.log('Will add to Db, the tableB Object with Name: ', tableB.firstName);
-    realm.add(tableB, TableB.schema.name);
-    console.log('Successfully added tableB to Db');
-    
-    console.log("Creating new tabelA2 to add to the Db")
+    console.log('Creating new tabelA2 to add to the Db');
     let tableA2 = new TableA();
-    realm.add(tableA2, TableA.schema.name);
+    realm.addA(tableA2, TableA);
     console.log('Successfully added tableA2 to Db');
 
     let tables = realm.findAll(TableA.schema.name);
-    console.log(tables.map((it) => it.code + ' || ' + it.firstName));
     console.log(tables.map((it) => it.getInfo()));
   };
 

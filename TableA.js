@@ -1,11 +1,13 @@
-export default class TableA {
-  code;
-  createdOn;
-  updatedOn;
-  localUpdatedOn;
-  deleted;
+import Realm from 'realm';
 
+export default class TableA extends Realm.Object {
+  code;
   firstName;
+
+  static insertionModel = (code, firstName) => ({
+    code,
+    firstName,
+  });
 
   getInfo() {
     return `Code: ${this.code} || Name: ${this.firstName}`;
@@ -16,11 +18,6 @@ export default class TableA {
     primaryKey: 'code',
     properties: {
       code: 'string',
-      createdOn: 'int?',
-      updatedOn: 'int?',
-      localUpdatedOn: 'int?',
-      deleted: 'bool?',
-
       firstName: 'string?',
     },
   };

@@ -7,7 +7,7 @@ export default class MyRealm {
   static dbOptions = {
     path: MyRealm.REALM_NAME,
     schema: TestDbModule,
-    schemaVersion: 1,
+    schemaVersion: 2,
   };
 
   static instanceObj;
@@ -21,7 +21,7 @@ export default class MyRealm {
     return MyRealm.instanceObj;
   }
 
-  add(obj, schema) {
+  addA(obj, schema) {
     console.log('adding ', obj.getInfo(), ' to db');
     if (!obj.code) {
       obj.code = uuidv4();
@@ -33,7 +33,7 @@ export default class MyRealm {
       );
     }
     MyRealm.instance().realm.write(() => {
-      MyRealm.instance().realm.create(schema, obj, Realm.UpdateMode.All);
+      MyRealm.instance().realm.create(schema, schema.insertionModel(obj.code, obj.firstName), Realm.UpdateMode.All);
     });
   }
 
