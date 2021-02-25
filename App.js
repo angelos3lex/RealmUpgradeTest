@@ -8,25 +8,35 @@
 
 import React from 'react';
 import {StyleSheet, View, Text, Pressable} from 'react-native';
+import Account, {AccountRealmObject} from './Account';
 import MyRealm from './MyRealm';
-import TableA from './TableA';
+import Organization, {OrganizationRealmObject} from './Organization';
 
 const App = () => {
   const press = () => {
-    console.log('Will add first object to Db');
     let realm = new MyRealm();
-    let tableA = new TableA();
-    console.log('First Object to be added: ', tableA.getInfo());
-    realm.addA(tableA, TableA);
-    console.log('Successfully added tableA to Db');
 
-    console.log('Creating new tabelA2 to add to the Db');
-    let tableA2 = new TableA();
-    realm.addA(tableA2, TableA);
-    console.log('Successfully added tableA2 to Db');
+    let organization = new Organization();
+    organization.code = '1234-12345';
 
-    let tables = realm.findAll(TableA.schema.name);
-    console.log(tables.map((it) => it.getInfo()));
+    let account = new Account();
+    account.code = '1234-12345-1234567';
+    account.organization = organization;
+
+    realm.add(account.organization, OrganizationRealmObject.schema.name);
+    console.log('Successfully added organization to Db');
+
+    realm.add(account, AccountRealmObject.schema.name);
+    console.log('Successfully added account to Db');
+
+    console.log('Successfully added account and organization to Db');
+
+    let accounts = realm.findAllAccounts();
+    let lastAccount = accounts[accounts.length - 1];
+    console.log('Last Account\n');
+    console.log(lastAccount);
+    console.log("Last Account's organization field");
+    console.log(lastAccount.organization);
   };
 
   return (
