@@ -26,6 +26,7 @@ const App = () => {
     realm.add(account.organization, OrganizationRealmObject.schema.name);
     console.log('Successfully added organization to Db');
 
+    // Below line will crash if BaseRealmObject extends Realm.Object. Without the extend, it works! But then of course the Realm.Object methods are not defined
     realm.add(account, AccountRealmObject.schema.name);
     console.log('Successfully added account to Db');
 
