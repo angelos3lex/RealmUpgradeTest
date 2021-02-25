@@ -2,7 +2,7 @@ import Realm from 'realm';
 
 import {BaseDBObject} from './BaseDBObject';
 import BaseRealmObject from './BaseRealmObject';
-import Account, {AccountRealmObject} from './Account';
+import {AccountRealmObject} from './Account';
 
 export default class Organization implements BaseDBObject {
   private _dbModel: OrganizationRealmObject;
@@ -13,16 +13,6 @@ export default class Organization implements BaseDBObject {
 
   static wrap(dbModel: OrganizationRealmObject): Organization {
     return new Organization(dbModel);
-  }
-
-  public getParent(): BaseDBObject | null {
-    if (!this.dbModel.account) {
-      return null;
-    }
-    let accounts = Array.from(this.dbModel.account).map((it) =>
-      Account.wrap(it),
-    );
-    return accounts.length > 0 ? accounts[0] : null;
   }
 
   get dbModel(): OrganizationRealmObject {

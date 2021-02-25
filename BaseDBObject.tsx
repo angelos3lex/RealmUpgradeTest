@@ -1,5 +1,5 @@
-import Realm from "realm";
+import BaseRealmObject from "./BaseRealmObject";
 export interface BaseDBObject {
     code?: string;
-    dbModel: Realm.Object;
+    dbModel: BaseRealmObject;
 }
