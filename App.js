@@ -23,6 +23,13 @@ const App = () => {
     account.code = '1234-12345-1234567';
     account.organization = organization;
 
+    // console.log('what?')
+    // console.log(organization.dbModel);
+    // organization.dbModel.addListener(object => {
+    //   console.log('listener')
+    //   console.log(object)
+    // })
+
     realm.add(account.organization, OrganizationRealmObject.schema.name);
     console.log('Successfully added organization to Db');
 
@@ -38,6 +45,11 @@ const App = () => {
     console.log(lastAccount);
     console.log("Last Account's organization field");
     console.log(lastAccount.organization);
+
+    lastAccount.organization.dbModel.addListener(object => {
+        console.log('listener')
+        console.log(object)
+    })
   };
 
   return (

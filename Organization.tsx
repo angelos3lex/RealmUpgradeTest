@@ -8,7 +8,7 @@ export default class Organization implements BaseDBObject {
   private _dbModel: OrganizationRealmObject;
 
   constructor(dbModel?: OrganizationRealmObject) {
-    this._dbModel = dbModel ?? new OrganizationRealmObject();
+    this._dbModel = dbModel ?? {} as OrganizationRealmObject;
   }
 
   static wrap(dbModel: OrganizationRealmObject): Organization {

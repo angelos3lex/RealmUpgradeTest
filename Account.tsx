@@ -11,7 +11,7 @@ export default class Account implements BaseDBObject {
   private _dbModel: AccountRealmObject;
 
   constructor(dbModel?: AccountRealmObject) {
-    this._dbModel = dbModel ?? new AccountRealmObject();
+    this._dbModel = dbModel ?? {} as AccountRealmObject;
   }
 
   static wrap(dbModel: AccountRealmObject): Account {
